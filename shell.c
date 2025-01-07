@@ -1,13 +1,5 @@
 #include "simple_shell.h"
 
-/**
- * main - simple UNIX command line interpreter
- * @argc: number of arguments passed (unused)
- * @argv: argument passed (name of the programm)
- *
- * Return: 0.
- */
-
 int main(__attribute__((unused))int argc, char **argv)
 {
 	char *string, *command[2];
@@ -18,7 +10,7 @@ int main(__attribute__((unused))int argc, char **argv)
 	{
 		if (isatty(STDIN_FILENO))
 			printf("hsh$ "); /* display prompt */
-		if (getline(&string, &len, stdin) == -1) /* handle getline error */
+		if (getline(&string, &len, stdin) == -1) /* read user's command and handle getline error */
 		{
 			if (isatty(STDIN_FILENO))
 				printf("\n");
@@ -35,9 +27,9 @@ int main(__attribute__((unused))int argc, char **argv)
 		}
 		if (child == 0) /* child process */
 		{
-			if (execve(string, command, NULL) == -1) /* handle execve error */
+			if (execve(string, command, NULL) == -1) /* execute command and handle execve error */
 			{
-				perror(argv[0]);
+				printf("%s: 1: %s: not found\n", argv[0], command[0]);
 				exit(1);
 			}
 		}
