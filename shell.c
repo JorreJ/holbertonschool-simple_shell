@@ -29,7 +29,7 @@ int main(__attribute__((unused))int argc, char **argv)
 		{
 			if (execve(string, command, NULL) == -1) /* execute command and handle execve error */
 			{
-				perror(argv[0]);
+				printf("%s: 1: %s: not found\n", argv[0], command[0]);
 				exit(1);
 			}
 		}
