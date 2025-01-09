@@ -1,35 +1,36 @@
 #include "shell.h"
 
 /**
- * execute_command - Exécute une commande saisie par l'utilisateur
- * @line: La commande à exécuter
+ * execute - Executes a command
+ * @args: The array of arguments
+ *
+ * Return: 1 if successful, 0 otherwise
  */
-void execute_command(char *line)
+
+int execute(char **args)
 {
 	pid_t pid;
 	int status;
-	char *argv[2];
+	char *cmd = find_command(args[0]);
 
-	pid = fork(); /* Crée un processus enfant */
-	if (pid == -1)
+	if (!cmd)
 	{
-		perror("fork");
-		return;
+		fprintf(stderr, "%s: command not found\n", args[0]);
+		return (1);
 	}
 
-	if (pid == 0) /* Dans le processus enfant */
+	pid = fork();
+	if (pid == 0) /* Processus enfant */
 	{
-		argv[0] = line;
-		argv[1] = NULL;
-
-		if (execve(line, argv, NULL) == -1)
-		{
-			perror(line);
-			exit(EXIT_FAILURE);
-		}
+		execve(cmd, args, environ);
+		perror("execve");
+		exit(EXIT_FAILURE);
 	}
-	else /* Dans le processus parent */
-	{
-		wait(&status);
-		}
+	else if (pid > 0) /* Processus parent */
+	wait(&status);
+	else
+	perror("fork");
+
+	free(cmd);
+	return (1);
 }
