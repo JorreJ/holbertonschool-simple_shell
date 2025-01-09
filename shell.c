@@ -6,7 +6,7 @@
  * @inter_name: name of the interpreter (used in error message)
  */
 
-void exec_command(char *string, char *inter_name)
+void exec_command(char *string, char **env)
 {
 	pid_t child;
 	char **command;
@@ -14,9 +14,7 @@ void exec_command(char *string, char *inter_name)
 
 	child = fork(); /* create child process */
 	if (child == -1) /* handle fork error */
-	{
-		perror("fork fail");
-	}
+		perror("fork");
 	else if (child == 0) /* child process */
 	{
 		command = parse_input(string); /* handle arguments */
@@ -25,9 +23,9 @@ void exec_command(char *string, char *inter_name)
 			free(command);
 			return;
 		}
-		if (execve(string, command, NULL) == -1) /* handle execve error */
+		if (execve(string, command, env) == -1) /* handle execve error */
 		{
-			fprintf(stderr, "%s: %s: %s\n", inter_name, string, strerror(errno));
+			perror("execve");
 			free(command);
 			exit(1);
 		}
@@ -46,7 +44,7 @@ void exec_command(char *string, char *inter_name)
  * Return: 0.
  */
 
-int main(__attribute__((unused))int argc, char **argv, char **env)
+int main(__attribute__((unused))int argc, __attribute__((unused))char **argv, char **env)
 {
 	char *string = NULL;
 	size_t len = 0;
@@ -66,7 +64,7 @@ int main(__attribute__((unused))int argc, char **argv, char **env)
 			string[_strlen(string) - 1] = '\0';
 		}
 		string = command_path(string, env); /* search the path of the command */
-		exec_command(string, argv[0]); /* execute the command passed */
+		exec_command(string, env); /* execute the command passed */
 	}
 	free(string); /* free allocated memory */
 	return (0);

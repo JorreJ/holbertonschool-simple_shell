@@ -53,7 +53,10 @@ char *command_path(char *string, char **env)
 		i++;
 	}
 	if (!path) /* handle getenv error */
+	{
+		fprintf(stderr, "Command not found: %s\n", string);
 		return (NULL);
+	}
 	copy = strdup(path); /* copy the env var took by getenv */
 	token = strtok(copy, ":"); /* tokenize the copied env var */
 	while (token) /* check all paths */
