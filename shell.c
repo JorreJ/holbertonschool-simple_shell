@@ -23,7 +23,7 @@ void exec_command(char *string, char *inter_name)
 		command[1] = NULL;
 		if (execve(string, command, NULL) == -1) /* handle execve error */
 		{
-			fprintf(stderr, "%s: %s: %s\n", inter_name, string, strerror(errno));
+			fprintf(stderr, "%s: %s\n", inter_name, strerror(errno));
 			exit(1);
 		}
 	}
