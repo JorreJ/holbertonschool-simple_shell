@@ -7,14 +7,10 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <sys/stat.h>
 #include <errno.h>
 
 int _strlen(char *s);
-char *_strcat(char *dest, char *src);
-char *_strchr(char *s, char c);
 void exec_command(char *string, char *inter_name);
 char **parse_input(char *string);
-char *command_path(char *string);
 
 #endif /* SIMPLESHELL_H */

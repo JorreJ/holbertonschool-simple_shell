@@ -19,7 +19,7 @@ void exec_command(char *string, char *inter_name)
 	}
 	else if (child == 0) /* child process */
 	{
-		command = parse_input(string);
+		command = parse_input(string); /* handle arguments */
 		if (!command)
 		{
 			free(command);
@@ -40,6 +40,8 @@ void exec_command(char *string, char *inter_name)
 
 /**
  * main - Entry point
+ * @argc: argument count (unused)
+ * @argv: argument value
  *
  * Return: 0.
  */
@@ -48,6 +50,7 @@ int main(__attribute__((unused))int argc, char **argv)
 {
 	char *string = NULL;
 	size_t len = 0;
+
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
@@ -62,7 +65,6 @@ int main(__attribute__((unused))int argc, char **argv)
 		{
 			string[_strlen(string) - 1] = '\0';
 		}
-		string = command_path(string);
 		exec_command(string, argv[0]); /* execute the command passed */
 	}
 	free(string); /* free allocated memory */
