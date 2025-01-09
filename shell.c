@@ -35,6 +35,8 @@ void exec_command(char *string, char *inter_name)
 
 /**
  * main - Entry point
+ * @argc: argument count (unused)
+ * @argv: argument value
  *
  * Return: 0.
  */
@@ -43,6 +45,7 @@ int main(__attribute__((unused))int argc, char **argv)
 {
 	char *string = NULL;
 	size_t len = 0;
+
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
