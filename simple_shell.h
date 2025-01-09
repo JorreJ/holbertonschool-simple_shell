@@ -11,5 +11,6 @@
 
 int _strlen(char *s);
 void exec_command(char *string, char *inter_name);
+char **parse_input(char *string);
 
 #endif /* SIMPLESHELL_H */
