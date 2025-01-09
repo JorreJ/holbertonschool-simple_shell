@@ -1,31 +1,6 @@
 #include "simple_shell.h"
 
 /**
- * read_prompt - read user's command
- *
- * Return: string of the user's command
- */
-
-/*char *read_prompt(void)
-{
-	char *string = NULL;
-	size_t len;
-
-	printf("hsh$ ");
-	if (getline(&string, &len, stdin) == -1)
-	{
-		if (isatty(STDIN_FILENO))
-			printf("\n");
-		return (NULL);
-	}
-	if (string[_strlen(string) - 1] == '\n')
-	{
-		string[_strlen(string) - 1] = '\0';
-	}
-	return (string);
-}*/
-
-/**
  * exec_command - execute the command passed
  * @string: command to execute
  * @inter_name: name of the interpreter (used in error message)
@@ -82,55 +57,8 @@ int main(__attribute__((unused))int argc, char **argv)
 		{
 			string[_strlen(string) - 1] = '\0';
 		}
-		exec_command(string, argv[0]);
+		exec_command(string, argv[0]); /* execute the command passed */
 	}
 	free(string); /* free allocated memory */
 	return (0);
 }
-
-/*
-
-
-	char *string, *command[2];
-	size_t len;
-	pid_t child;
-
-	while (1)
-	{
-		if (isatty(STDIN_FILENO))
-			printf("hsh$ ");
-		if (getline(&string, &len, stdin) == -1)
-		{
-			if (isatty(STDIN_FILENO))
-				printf("\n");
-			break;
-		}
-		if (string[_strlen(string) - 1] == '\n') 
-		{
-			string[_strlen(string) - 1] = '\0';
-		}
-		command[0] = string;
-		command[1] = NULL;
-		child = fork(); 
-		if (child == -1) 
-		{
-			printf("%s: 1: %s: not found", argv[0], command[0]);
-			break;
-		}
-		if (child == 0) 
-		{
-			if (execve(string, command, NULL) == -1) 
-			{
-				printf("%s: 1: %s: not found\n", argv[0], command[0]);
-				exit(1);
-			}
-		}
-		else 
-		{
-			wait(NULL);
-		}
-	}
-	free(string); 
-	return (0);
-}
-*/
