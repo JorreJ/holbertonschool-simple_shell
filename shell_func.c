@@ -34,14 +34,24 @@ char **parse_input(char *string)
  * Return: string containing the absolute path of the command
  */
 
-char *command_path(char *string)
+char *command_path(char *string, char **env)
 {
-	char *path = getenv("PATH"), *copy;
+	char *path = NULL, *copy;
 	char *token = NULL, *cmd_path = NULL;
 	struct stat st;
+	int i = 0;
 
 	if (_strchr(string, '/') && stat(string, &st) == 0) /* check absolute path */
 		return (string);
+	while (env[i])
+	{
+		if (_strcmp(env[i], "PATH=") == 0)
+		{
+			path = env[i] + 5;
+			break;
+		}
+		i++;
+	}
 	if (!path) /* handle getenv error */
 		return (NULL);
 	copy = strdup(path); /* copy the env var took by getenv */

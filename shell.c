@@ -46,7 +46,7 @@ void exec_command(char *string, char *inter_name)
  * Return: 0.
  */
 
-int main(__attribute__((unused))int argc, char **argv)
+int main(__attribute__((unused))int argc, char **argv, char **env)
 {
 	char *string = NULL;
 	size_t len = 0;
@@ -65,7 +65,7 @@ int main(__attribute__((unused))int argc, char **argv)
 		{
 			string[_strlen(string) - 1] = '\0';
 		}
-		string = command_path(string); /* search the path of the command */
+		string = command_path(string, env); /* search the path of the command */
 		exec_command(string, argv[0]); /* execute the command passed */
 	}
 	free(string); /* free allocated memory */
