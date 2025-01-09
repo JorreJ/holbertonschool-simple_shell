@@ -62,6 +62,7 @@ int main(__attribute__((unused))int argc, char **argv)
 		{
 			string[_strlen(string) - 1] = '\0';
 		}
+		string = command_path(string);
 		exec_command(string, argv[0]); /* execute the command passed */
 	}
 	free(string); /* free allocated memory */
