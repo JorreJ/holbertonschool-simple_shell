@@ -1,18 +1,48 @@
 #include "shell.h"
 
 /**
- * _strcmp - Compare deux chaînes de caractères
- * @s1: Première chaîne
- * @s2: Deuxième chaîne
+ * parse_input - Splits the user input into arguments
+ * @input: The input string
  *
- * Return: 0 si les chaînes sont identiques, une autre valeur sinon
+ * Return: An array of arguments
  */
-int _strcmp(const char *s1, const char *s2)
+
+char **parse_input(char *input)
 {
-	while (*s1 && (*s1 == *s2))
+	char **args = NULL;
+	char *token = NULL;
+	size_t i = 0;
+
+	args = malloc(64 * sizeof(char *));
+	if (!args)
 	{
-		s1++;
-		s2++;
+		perror("malloc");
+		return (NULL);
 	}
-	return (*(const unsigned char *)s1 - *(const unsigned char *)s2);
+
+	token = strtok(input, " ");
+	while (token)
+	{
+		args[i++] = strdup(token);
+		token = strtok(NULL, " ");
+	}
+	args[i] = NULL;
+	return (args);
+}
+
+/**
+ * free_args - Frees the memory allocated for arguments
+ * @args: The array of arguments
+ */
+
+void free_args(char **args)
+{
+	size_t i = 0;
+
+	if (!args)
+	return;
+
+	while (args[i])
+	free(args[i++]);
+	free(args);
 }
