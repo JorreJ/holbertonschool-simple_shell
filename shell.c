@@ -9,7 +9,7 @@
 void exec_command(char *string, char *inter_name)
 {
 	pid_t child;
-	char *command[2];
+	char **command;
 	int status;
 
 	child = fork(); /* create child process */
@@ -19,11 +19,16 @@ void exec_command(char *string, char *inter_name)
 	}
 	else if (child == 0) /* child process */
 	{
-		command[0] = string;
-		command[1] = NULL;
+		command = parse_input(string);
+		if (!command)
+		{
+			free(command);
+			return;
+		}
 		if (execve(string, command, NULL) == -1) /* handle execve error */
 		{
 			fprintf(stderr, "%s: %s: %s\n", inter_name, string, strerror(errno));
+			free(command);
 			exit(1);
 		}
 	}
