@@ -1,12 +1,10 @@
 # Simple Shell
+A basic UNIX command-line interpreter implemented in C.
 
-## Description
-Ce projet implémente un interpréteur de ligne de commande simple en C.
-
-## Fonctionnalités
-- Affiche un prompt pour l'utilisateur
-- Lit les commandes saisies par l'utilisateur
-- Exécute des commandes simples en utilisant `execve`
+## Features
+- Executes commands from the PATH.
+- Handles built-in commands like `exit` and `env`.
+- Supports interactive and non-interactive modes.
 
 ## Compilation
 ```bash
