@@ -29,7 +29,7 @@ void exec_command(char *string, char **env)
 		if (execve(command[0], command, env) == -1) /* handle execve error */
 		{
 			perror("execve");
-			free(command);
+			free(command[0]);
 			exit(1);
 		}
 	}

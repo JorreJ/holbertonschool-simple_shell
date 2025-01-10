@@ -49,22 +49,21 @@ char *command_path(char *string, char **env)
 	}
 	if (!path) /* handle getenv error */
 	{
-		fprintf(stderr, "Command not found: %s\n", string);
+		perror("Path not found");
 		return (NULL);
 	}
 	copy = strdup(path); /* copy the env var took by getenv */
 	token = strtok(copy, ":"); /* tokenize the copied env var */
 	while (token) /* check all paths */
 	{
-		cmd_path = malloc((sizeof(char) * _strlen(token)) +
-		(sizeof(char) * _strlen(string)) + 2);
+		cmd_path = malloc((_strlen(token)) + _strlen(string) + 2);
 		if (!cmd_path) /* handle malloc error */
 		{
 			free(copy);
-			return (NULL);
+			exit(EXIT_FAILURE);
 		}
 		sprintf(cmd_path, "%s/%s", token, string); /* concatenate command and path */
-		if (stat(cmd_path, &st) == 0) /* check if the path is correct */
+		if (stat(cmd_path, &st) == 0 && access(cmd_path, X_OK) == 0) /* check if the path is correct */
 		{
 			free(copy);
 			return (cmd_path);
@@ -72,6 +71,7 @@ char *command_path(char *string, char **env)
 		free(cmd_path); /* free allocated memory */
 		token = strtok(NULL, ":"); /* tokenize the copied env var */
 	}
+	free(copy);
 	fprintf(stderr, "Command not found: %s\n", string);
 	return (NULL);
 }
