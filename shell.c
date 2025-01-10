@@ -49,6 +49,7 @@ int main(int argc, char **argv, char **env)
 {
 	char *string = NULL;
 	size_t len = 0;
+	int i = 0;
 	(void)argc;
 	(void)argv;
 
@@ -67,7 +68,16 @@ int main(int argc, char **argv, char **env)
 			string[_strlen(string) - 1] = '\0';
 		}
 		if (strcmp("exit", string) == 0)
-			break;
+		{
+			free(string);
+			exit(0);
+		}
+		if (strcmp("env", string) == 0)
+		{
+			while (env[i++])
+				printf("%s", env[i]);
+			printf("\n");
+		}
 		string = command_path(string, env); /* search the path of the command */
 		if (!string)
 			continue;
