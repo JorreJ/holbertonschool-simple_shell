@@ -19,7 +19,7 @@ void exec_command(char *string, char **env)
 		return;
 	}
 	command[0] = command_path(command[0], env); /* search path of the command */
-	if (!string)
+	if (!command[0])
 		return;
 	child = fork(); /* create child process */
 	if (child == -1) /* handle fork error */
