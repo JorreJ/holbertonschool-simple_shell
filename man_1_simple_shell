@@ -1,5 +1,5 @@
 .TH SIMPLE_SHELL 1 "Simple Shell"
-.SH NAME
+.SH Shell
 simple_shell \- a simple UNIX command interpreter
 .SH SYNOPSIS
 .B simple_shell
@@ -12,3 +12,5 @@ $ ./hsh
 Non-interactive mode:
 $ echo "ls" | ./hsh
 .SH AUTHORS
+Martins De Castro Kevin <9830@holbertonstudents.com>
+Jade Jorré <@holbertonstudents.com>
