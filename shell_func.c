@@ -30,6 +30,7 @@ char **parse_input(char *string)
 /**
  * command_path - search the absolute path of the input command
  * @string: input command
+ * @env: environment var passed from main
  *
  * Return: string containing the absolute path of the command
  */

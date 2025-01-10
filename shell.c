@@ -3,7 +3,7 @@
 /**
  * exec_command - execute the command passed
  * @string: command to execute
- * @inter_name: name of the interpreter (used in error message)
+ * @env: environment variable passed from main
  */
 
 void exec_command(char *string, char **env)
@@ -40,14 +40,17 @@ void exec_command(char *string, char **env)
  * main - Entry point
  * @argc: argument count (unused)
  * @argv: argument value
+ * @env: environment variable
  *
  * Return: 0.
  */
 
-int main(__attribute__((unused))int argc, __attribute__((unused))char **argv, char **env)
+int main(int argc, char **argv, char **env)
 {
 	char *string = NULL;
 	size_t len = 0;
+	(void)argc;
+	(void)argv;
 
 	while (1)
 	{
