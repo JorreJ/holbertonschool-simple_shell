@@ -49,7 +49,7 @@ int main(int argc, char **argv, char **env)
 {
 	char *string = NULL;
 	size_t len = 0;
-	int i = 0;
+	/*int i = 0;*/
 	(void)argc;
 	(void)argv;
 
@@ -74,9 +74,7 @@ int main(int argc, char **argv, char **env)
 		}
 		if (strcmp("env", string) == 0)
 		{
-			while (env[i++])
-				printf("%s", env[i]);
-			printf("\n");
+			_env(env);
 			continue;
 		}
 		string = command_path(string, env); /* search the path of the command */

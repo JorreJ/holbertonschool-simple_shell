@@ -14,6 +14,7 @@ int _strlen(char *s);
 char *_strcat(char *dest, char *src);
 char *_strchr(char *s, char c);
 int _strcmp(char *s1, char *s2);
+void _env(char **env);
 void exec_command(char *string, char **env);
 char **parse_input(char *string);
 char *command_path(char *string, char **env);

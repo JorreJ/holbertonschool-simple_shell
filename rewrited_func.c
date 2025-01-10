@@ -96,3 +96,18 @@ int _strcmp(char *s1, char *s2)
 		return (s1[c] - s2[c]);
 	}
 }
+
+void _env(char **env)
+{
+	int i;
+	if (!env)
+	{
+		fprintf(stderr, "Error: Environment is empty or invalid.\n");
+		return;
+	}
+	for (i = 0; env[i] != NULL; i++)
+	{
+		printf("%s", env[i]);
+		printf("\n");
+	}
+}
