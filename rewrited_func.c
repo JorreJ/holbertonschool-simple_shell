@@ -97,9 +97,14 @@ int _strcmp(char *s1, char *s2)
 	}
 }
 
+/**
+ * _env - print the current environment
+ * @env: env variable passed from main
+ */
 void _env(char **env)
 {
 	int i;
+
 	if (!env)
 	{
 		fprintf(stderr, "Error: Environment is empty or invalid.\n");

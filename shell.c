@@ -18,7 +18,7 @@ void exec_command(char *string, char **env)
 		free(command);
 		return;
 	}
-	command[0] = command_path(command[0], env); /* search the path of the command */
+	command[0] = command_path(command[0], env); /* search path of the command */
 	if (!string)
 		return;
 	child = fork(); /* create child process */
@@ -26,7 +26,6 @@ void exec_command(char *string, char **env)
 		perror("fork");
 	else if (child == 0) /* child process */
 	{
-		
 		if (execve(command[0], command, env) == -1) /* handle execve error */
 		{
 			perror("execve");
