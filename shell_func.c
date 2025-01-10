@@ -40,7 +40,7 @@ char *command_path(char *string, char **env)
 	struct stat st;
 	int i = 0;
 
-	if (_strchr(string, '/') && stat(string, &st) == 0) /* check absolute path */
+	if (_strchr(string, '/') && access(string, X_OK) == 0) /* check path */
 		return (string);
 	while (env[i++] && _strcmp(env[i], "PATH=") != 0) /* get PATH env var */
 	{
@@ -63,7 +63,7 @@ char *command_path(char *string, char **env)
 			exit(EXIT_FAILURE);
 		}
 		sprintf(cmd_path, "%s/%s", token, string); /* concatenate command and path */
-		if (stat(cmd_path, &st) == 0 && access(cmd_path, X_OK) == 0) /* check if the path is correct */
+		if (stat(cmd_path, &st) == 0 && access(cmd_path, X_OK) == 0) /* check path */
 		{
 			free(copy);
 			return (cmd_path);
