@@ -12,18 +12,22 @@ void exec_command(char *string, char **env)
 	char **command;
 	int status;
 
+	command = parse_input(string); /* handle arguments */
+	if (!command)
+	{
+		free(command);
+		return;
+	}
+	command[0] = command_path(command[0], env); /* search the path of the command */
+	if (!string)
+		return;
 	child = fork(); /* create child process */
 	if (child == -1) /* handle fork error */
 		perror("fork");
 	else if (child == 0) /* child process */
 	{
-		command = parse_input(string); /* handle arguments */
-		if (!command)
-		{
-			free(command);
-			return;
-		}
-		if (execve(string, command, env) == -1) /* handle execve error */
+		
+		if (execve(command[0], command, env) == -1) /* handle execve error */
 		{
 			perror("execve");
 			free(command);
@@ -61,7 +65,8 @@ int main(int argc, char **argv, char **env)
 		{
 			if (isatty(STDIN_FILENO))
 				printf("\n");
-			break;
+			free(string);
+			exit(EXIT_SUCCESS);
 		}
 		if (string[_strlen(string) - 1] == '\n') /* remove "\n" character */
 		{
@@ -77,9 +82,6 @@ int main(int argc, char **argv, char **env)
 			_env(env);
 			continue;
 		}
-		string = command_path(string, env); /* search the path of the command */
-		if (!string)
-			continue;
 		exec_command(string, env); /* execute the command passed */
 	}
 	free(string); /* free allocated memory */

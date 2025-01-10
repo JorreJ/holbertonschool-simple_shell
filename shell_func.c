@@ -23,7 +23,6 @@ char **parse_input(char *string)
 		token = strtok(NULL, " \t\n");
 	}
 	args[i] = NULL;
-	free(token);
 	return (args);
 }
 
@@ -43,7 +42,7 @@ char *command_path(char *string, char **env)
 
 	if (_strchr(string, '/') && stat(string, &st) == 0) /* check absolute path */
 		return (string);
-	while (env[i++] && _strcmp(env[i], "PATH=") != 0)
+	while (env[i++] && _strcmp(env[i], "PATH=") != 0) /* get PATH env var */
 	{
 		if (_strcmp(env[i + 1], "PATH=") == 0)
 			path = env[i + 1] + 5;
@@ -73,7 +72,6 @@ char *command_path(char *string, char **env)
 		free(cmd_path); /* free allocated memory */
 		token = strtok(NULL, ":"); /* tokenize the copied env var */
 	}
-	free(copy);
 	fprintf(stderr, "Command not found: %s\n", string);
 	return (NULL);
 }
