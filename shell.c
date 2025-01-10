@@ -70,13 +70,14 @@ int main(int argc, char **argv, char **env)
 		if (strcmp("exit", string) == 0)
 		{
 			free(string);
-			exit(0);
+			exit(EXIT_SUCCESS);
 		}
 		if (strcmp("env", string) == 0)
 		{
 			while (env[i++])
 				printf("%s", env[i]);
 			printf("\n");
+			continue;
 		}
 		string = command_path(string, env); /* search the path of the command */
 		if (!string)
