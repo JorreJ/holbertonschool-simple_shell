@@ -16,7 +16,6 @@ char **parse_input(char *string)
 	args = malloc(sizeof(char *) * 64); /* allocate memory */
 	if (!args) /* handle malloc error */
 		return (NULL);
-
 	token = strtok(string, " \t\n"); /* tokenize the string */
 	while (token && i < 64)
 	{
@@ -24,6 +23,7 @@ char **parse_input(char *string)
 		token = strtok(NULL, " \t\n");
 	}
 	args[i] = NULL;
+	free(token);
 	return (args);
 }
 
@@ -37,21 +37,16 @@ char **parse_input(char *string)
 
 char *command_path(char *string, char **env)
 {
-	char *path = NULL, *copy;
-	char *token = NULL, *cmd_path = NULL;
+	char *path = NULL, *copy, *token = NULL, *cmd_path = NULL;
 	struct stat st;
 	int i = 0;
 
 	if (_strchr(string, '/') && stat(string, &st) == 0) /* check absolute path */
 		return (string);
-	while (env[i])
+	while (env[i++] && _strcmp(env[i], "PATH=") != 0)
 	{
-		if (_strcmp(env[i], "PATH=") == 0)
-		{
-			path = env[i] + 5;
-			break;
-		}
-		i++;
+		if (_strcmp(env[i + 1], "PATH=") == 0)
+			path = env[i + 1] + 5;
 	}
 	if (!path) /* handle getenv error */
 	{
@@ -65,7 +60,10 @@ char *command_path(char *string, char **env)
 		cmd_path = malloc((sizeof(char) * _strlen(token)) +
 		(sizeof(char) * _strlen(string)) + 2);
 		if (!cmd_path) /* handle malloc error */
-			break;
+		{
+			free(copy);
+			return (NULL);
+		}
 		sprintf(cmd_path, "%s/%s", token, string); /* concatenate command and path */
 		if (stat(cmd_path, &st) == 0) /* check if the path is correct */
 		{
@@ -76,5 +74,6 @@ char *command_path(char *string, char **env)
 		token = strtok(NULL, ":"); /* tokenize the copied env var */
 	}
 	free(copy);
+	fprintf(stderr, "Command not found: %s\n", string);
 	return (NULL);
 }
