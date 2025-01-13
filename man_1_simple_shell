@@ -1,0 +1,16 @@
+.TH SIMPLE_SHELL 1 "Simple Shell"
+.SH Shell
+simple_shell \- a simple UNIX command interpreter
+.SH SYNOPSIS
+.B simple_shell
+.SH DESCRIPTION
+.B simple_shell
+is a basic command-line interpreter that executes commands and handles built-in commands like "exit" and "env".
+.SH USAGE
+Interactive mode:
+$ ./hsh
+Non-interactive mode:
+$ echo "ls" | ./hsh
+.SH AUTHORS
+Martins De Castro Kevin <9830@holbertonstudents.com>
+Jade Jorré <@holbertonstudents.com>
