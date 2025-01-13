@@ -2,7 +2,7 @@
 
 ## Description
 
-**Simple Shell** is a basic implementation of a UNIX command-line interpreter. This project was completed as part of the Holberton School program by **Jade Jorré** and **Kévin Martin De Castro**.
+**Simple Shell** is a basic implementation of a UNIX command-line interpreter. This project was completed as part of the Holberton School program by **Jade Jorré** and **Kévin Martins De Castro**.
 
 The shell provides an interface to execute commands in interactive and non-interactive modes, mimicking the behavior of `/bin/sh`. This project applies key concepts of UNIX system programming, such as process management, system calls, environment manipulation, and more.
 
@@ -39,7 +39,7 @@ The shell provides an interface to execute commands in interactive and non-inter
 
 1. Clone the GitHub repository:
    ```bash
-   git clone https://github.com/holbertonschool-simple_shell.git
+   git clone https://github.com/JorreJ/holbertonschool-simple_shell.git
    ```
 
 2. Compile the project:
@@ -81,13 +81,9 @@ file1 file2 file3
 
 | **File**            | **Role**                                    |
 |---------------------|---------------------------------------------|
-| `main.c`           | Entry point of the program.                 |
-| `shell.c`          | Contains the main logic of the shell.       |
-| `exec.c`           | Implementation of the `execve` call.        |
-| `path.c`           | Manages PATH searching.                     |
-| `builtins.c`       | Implements built-in commands.               |
-| `env.c`            | Handles environment manipulation.           |
-| `prompt.c`         | Displays the prompt and reads input.        |
+| `shell.c`           | Contains the main logic of the shell.       |
+| `shell_func.c`      | Implementation of the `execve` call.        |
+| `rewrited_func.c`   | Manages PATH searching.                     |
 
 ---
 
@@ -114,14 +110,5 @@ file1 file2 file3
 
 Project contributors:
 
-- **Jade Jorré**
-- **Kévin Martin De Castro**
-
----
-
-## Future Improvements
-
-- Add support for redirections (`>`, `>>`, `<`).
-- Implement pipes (`|`).
-- Add more built-in commands.
-- Support for complex shell scripts.
+- **Jade Jorré** - https://github.com/JorreJ
+- **Kévin Martin De Castro** - https://github.com/Kevindecastro
