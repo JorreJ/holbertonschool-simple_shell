@@ -1,16 +1,65 @@
-.TH SIMPLE_SHELL 1 "Simple Shell"
-.SH Shell
-simple_shell \- a simple UNIX command interpreter
+.TH SIMPLE_SHELL 1 "Simple Shell Manual" "Version 1.0"
+.SH NAME
+simple_shell \- A simple and lightweight UNIX command interpreter
 .SH SYNOPSIS
 .B simple_shell
+[\fIoptions\fR]
 .SH DESCRIPTION
 .B simple_shell
-is a basic command-line interpreter that executes commands and handles built-in commands like "exit" and "env".
+is a minimalist command-line interpreter designed to execute UNIX commands. It supports both external commands and a few basic built-in commands.
+
+The shell can be used in interactive or non-interactive mode.
+
+.SH OPTIONS
+.TP
+.B \-h, \-\-help
+Display this help page and exit.
+.TP
+.B \-v, \-\-version
+Display the program version and exit.
+
+.SH BUILT-IN COMMANDS
+.B simple_shell
+supports the following built-in commands:
+.TP
+.B exit
+Exit the shell. An optional exit status can be provided.
+.TP
+.B env
+Display the current environment variables.
+
 .SH USAGE
 Interactive mode:
-$ ./hsh
+.RS
+$ ./simple_shell
+.RE
+The user can enter commands directly at the prompt.
+
 Non-interactive mode:
-$ echo "ls" | ./hsh
+.RS
+$ echo "command" | ./simple_shell
+.RE
+The shell executes commands provided via standard input.
+
+.SH EXAMPLES
+.RS
+$ ./simple_shell
+simple_shell> ls -l
+simple_shell> exit
+.RE
+Interactive mode with manual exit.
+
+.RS
+$ echo "ls -l" | ./simple_shell
+.RE
+Non-interactive mode executing a single command.
+
 .SH AUTHORS
 Martins De Castro Kevin <9830@holbertonstudents.com>
-Jade Jorré <@holbertonstudents.com>
+Jade Jorré <10018@holbertonstudents.com>
+
+.SH BUGS
+Report bugs at <https://github.com/JorreJ/holbertonschool-simple_shell/issues>.
+
+.SH COPYRIGHT
+This program is distributed under the MIT license. See the LICENSE file for details.
