@@ -79,11 +79,11 @@ file1 file2 file3
 
 ## Main Files
 
-| **File**            | **Role**                                    |
-|---------------------|---------------------------------------------|
-| `shell.c`           | Contains the main logic of the shell.       |
-| `shell_func.c`      | Implementation of the `execve` call.        |
-| `rewrited_func.c`   | Manages PATH searching.                     |
+| **File**            | **Role**                                              |
+|---------------------|-------------------------------------------------------|
+| `shell.c`           | Contains the main logic of the shell.                 |
+| `shell_func.c`      | Contains the major functions needed by the shell.     |
+| `rewrited_func.c`   | Contains some rewrited pre-existing functions.        |
 
 ---
 
