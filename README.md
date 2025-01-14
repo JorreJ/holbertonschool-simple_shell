@@ -8,6 +8,12 @@ The shell provides an interface to execute commands in interactive and non-inter
 
 ---
 
+## Flowchart
+
+![Flowchart](images/simple_shell_flowchart.png)
+
+---
+
 ## Features
 
 ### Version 1.0
